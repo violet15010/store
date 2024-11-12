@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>简单购物页面</title>
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .product-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .add-product {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            background-image: url('4.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .add-product h2 {
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #ff0000;
+            color: #ffffff;
+            padding: 5px 10px;
+            border-radius: 0 0 5px 0;
+        }
+
+        .product-info {
+            margin-top: 10px;
+        }
+
+        .price {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .original-price {
+            font-size: 0.9em;
+            color: #999999;
+            margin-left: 10px;
+        }
+
+        .sales {
+            font-size: 0.9em;
+            color: #999999;
+            margin-top: 5px;
+        }
+
+        .product-description {
+            font-size: 0.9em;
+            color: #666666;
+            margin-top: 10px;
+        }
+
+        .product-tags {
+            margin-top: 10px;
+        }
+
+        .tag {
+            background-color: #f0f0f0;
+            color: #333333;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+
+        .product-actions {
+            margin-top: 10px;
+        }
+
+        .btn-cart, .btn-buy {
+            background-color: #ff0000;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .btn-buy {
+            background-color: #333333;
+        }
+
+        .footer {
+            background-color: #f8f8f8;
+            padding: 40px 0;
+            margin-top: 50px;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            margin: 0 20px;
+        }
+
+        .footer-section h4 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #666;
+            text-decoration: none;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+
+        .footer-section a:hover {
+            color: #ff4d4d;
+        }
+
+        .footer-section p {
+            color: #666;
+            font-size: 14px;
+            margin: 8px 0;
+        }
+
+        .form-input {
+            background-color: white;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>我的小商店</h1>
+        
+        <!-- 添加商品区域 -->
+        <div class="add-product">
+            <h2>添加新商品</h2>
+            <input type="file" id="imageInput" accept="image/*">
+            <input type="text" placeholder="商品名称" class="form-input">
+            <input type="number" placeholder="价格" class="form-input">
+            <button onclick="addProduct()">添加商品</button>
+        </div>
+
+        <!-- 商品展示区域 -->
+        <div class="product-grid">
+            <!-- 有的商品卡片 -->
+            <div class="product-card">
+                <div class="product-badge">热销</div>
+                <img src="1.jpg" class="product-image" >
+                <h3>示例商品1</h3>
+                <div class="product-info">
+                    <p class="price">¥99.00</p>
+                    <p class="original-price">¥199.00</p>
+                    <p class="sales">已售出: 1000+</p>
+                </div>
+                <div class="product-description">
+                    这是一段商品描述，可以写入商品的主要特点和卖点。
+                </div>
+                <div class="product-tags">
+                    <span class="tag">包邮</span>
+                    <span class="tag">七天退换</span>
+                </div>
+                <div class="product-actions">
+                    <button class="btn-cart">加入购物车</button>
+                    <button class="btn-buy">立即购买</button>
+                </div>
+            </div>
+
+            <!-- 新增的第二个商品卡片 -->
+            <div class="product-card">
+                <div class="product-badge">新品</div>
+                <img src="2.jpg" class="product-image" >
+                <h3>示例商品2</h3>
+                <div class="product-info">
+                    <p class="price">¥159.00</p>
+                    <p class="original-price">¥259.00</p>
+                    <p class="sales">已售出: 500+</p>
+                </div>
+                <div class="product-description">
+                    全新上市的商品，优质材料，超值优惠。
+                </div>
+                <div class="product-tags">
+                    <span class="tag">限时特惠</span>
+                    <span class="tag">正品保证</span>
+                </div>
+                <div class="product-actions">
+                    <button class="btn-cart">加入购物车</button>
+                    <button class="btn-buy">立即购买</button>
+                </div>
+            </div>
+
+            <!-- 新增的第三个商品卡片 -->
+            <div class="product-card">
+                <div class="product-badge">促销</div>
+                <img src="1.jpg" class="product-image" >
+                <h3>示例商品3</h3>
+                <div class="product-info">
+                    <p class="price">¥129.00</p>
+                    <p class="original-price">¥229.00</p>
+                    <p class="sales">已售出: 800+</p>
+                </div>
+                <div class="product-description">
+                    限时促销商品，性价比超高，错过就没有了。
+                </div>
+                <div class="product-tags">
+                    <span class="tag">限量版</span>
+                    <span class="tag">闪电发货</span>
+                </div>
+                <div class="product-actions">
+                    <button class="btn-cart">加入购物车</button>
+                    <button class="btn-buy">立即购买</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addProduct() {
+            const fileInput = document.getElementById('imageInput');
+            const file = fileInput.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // 这里可以处理图片预览和添加新商品卡片的逻辑
+                    console.log('图片已上传');
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+
+    <!-- 在 body 标签结束前添加以下代码 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-nav">
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <a href="cart.html">购物车</a>
+                    <a href="login.html">登录/注册</a>
+                    <a href="service.html">在线客服</a>
+                </div>
+                <div class="footer-section">
+                    <h4>帮助中心</h4>
+                    <a href="#">购物指南</a>
+                    <a href="#">支付方式</a>
+                    <a href="#">配送方式</a>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <p>客服热线：400-123-4567</p>
+                    <p>营业时间：9:00-22:00</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
